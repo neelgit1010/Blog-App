@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Home</title>
+  </head>
+  <script src="/scripts/deleteBlog.js"></script>
+  <body>
+    <%- include('./partials/nav') %>
+
+    <div class="container mt-4">
+      <div class="row row-cols-4">
+        <% if (locals.user) { %> <% allblogs.forEach(blog => { %>
+        <div class="col">
+          <div class="card col" style="width: 18rem">
+            <img src=" <%= blog.coverimgURL %> " class="card-img-top" />
+            <div class="card-body">
+              <div class="container">
+                <h5 class="card-title"><%= blog.title %></h5>
+                <a href=" /blog/<%= blog._id %> " class="btn btn-primary"
+                  >Read</a
+                >
+                <button
+                  onclick="deleteBlog('<%= blog._id %>')"
+                  class="btn btn-danger"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+      <% } else { %>
+      <div class="container-xxl mt-4">
+        <h1>Welcome to BlazeBlogs!</h1>
+        <h2>Create your blogs instantly!</h2>
+        <div class="container-xxl mt-4 p-2">
+          <a href="/user/signin" class="btn btn-primary">Sign in</a>
+          <a href="/user/signup" class="btn btn-primary">Sign up</a>
+        </div>
+      </div>
+      <% } %>
+    </div>
+    <%- include('./partials/script') %>
+  </body>
+</html>
